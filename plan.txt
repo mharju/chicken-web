@@ -1,0 +1,28 @@
+ready made:
+- chatgpt
+- html dsl
+
+start server
+  - root-path resources/
+  - vhost map to app (".*" . )
+  - handle-exception lambda exn chain with send-status with 'ise and build-error-message exn chain
+
+create app 
+ - use match on cdr of uri-path of the request uri or the current request
+
+create the HTML page structure
+  - (link ((rel stylesheet) (href "https://fonts.googleapis.com/css?family=Young+Serif:400") (media all)))
+  - first initial hello world sample
+  - proper with:
+  	main -> header, messages-list, form
+	stripes and
+	script
+
+create handle-message
+ - first with basic http 301
+ - then add POST handler
+ 	* take msg from request vars
+	* add the message to messages list
+	* send to chat-response
+- match result to either function call or message
+- redirect with-headers to `((location "/")) and (lambda () (send-status 'moved-permanently))
